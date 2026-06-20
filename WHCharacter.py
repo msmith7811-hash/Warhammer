@@ -62,6 +62,8 @@ class Monster:
    WillPower.SetName('WP')
    Fellowship = CharAttrib()
    Fellowship.SetName('Fel')
+   WoundsMax = 0
+   WoundsCurrent = WoundsMax
    
    def GetWS(self):
         return self.WeaponSkill.GetValue()
@@ -136,6 +138,10 @@ class Monster:
             self.Intelligence.SetBaseValue(20+WHUtils.RollDice()+WHUtils.RollDice())
             self.WillPower.SetBaseValue(20+WHUtils.RollDice()+WHUtils.RollDice())
             self.Fellowship.SetBaseValue(20+WHUtils.RollDice()+WHUtils.RollDice())
+
+
+        self.WoundsMax = self.Strength.GetBonus() + 2*(self.Toughness.GetBonus()) + self.WillPower.GetBonus()
+        self.WoundsCurrent = self.WoundsMax
         return
 
    def showLong(self):
@@ -158,6 +164,7 @@ class Monster:
         print("Intelligence (bonus): ",self.Intelligence.GetValue(), "(",self.Intelligence.GetBonus(),")")
         print("WillPower (bonus): ",self.WillPower.GetValue(), "(",self.WillPower.GetBonus(),")")
         print("Fellowship (bonus): ",self.Fellowship.GetValue(), "(",self.Fellowship.GetBonus(),")")
+        print("Wounds (maximum): ",self.WoundsCurrent, "(",self.WoundsMax,")")
         print("*****************************************************")
         return
         
