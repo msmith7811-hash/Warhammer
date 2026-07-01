@@ -24,4 +24,7 @@ def CheckForDoubles(number):
     else:
         return False
     
-    
+def ReverseDice(number):
+    reversednumber = (number%19)*10 + int(number/10)
+    return reversednumber  
+

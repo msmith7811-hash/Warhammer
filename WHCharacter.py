@@ -64,6 +64,8 @@ class Monster:
    Fellowship.SetName('Fel')
    WoundsMax = 0
    WoundsCurrent = WoundsMax
+   Corruption = 0
+   
    
    def GetWS(self):
         return self.WeaponSkill.GetValue()
@@ -165,6 +167,7 @@ class Monster:
         print("WillPower (bonus): ",self.WillPower.GetValue(), "(",self.WillPower.GetBonus(),")")
         print("Fellowship (bonus): ",self.Fellowship.GetValue(), "(",self.Fellowship.GetBonus(),")")
         print("Wounds (maximum): ",self.WoundsCurrent, "(",self.WoundsMax,")")
+        print("Corruption: ",self.Corruption)
         print("*****************************************************")
         return
         
