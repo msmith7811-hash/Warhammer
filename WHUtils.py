@@ -26,5 +26,9 @@ def CheckForDoubles(number):
     
 def ReverseDice(number):
     reversednumber = (number%19)*10 + int(number/10)
-    return reversednumber  
+    return reversednumber 
 
+def SkillTest(target):
+    Roll = RollPercentage()
+    SucessLevel = int((target - roll)/10)
+    return successLevel

@@ -2,6 +2,7 @@
 import random
 import WHCharacter
 import WHUtils
+import WHCombat
 
 CharacterList = []
 index = 0;
@@ -29,6 +30,7 @@ while True:
                             print("please select N,E,or Q")      
         elif MainMenu=='f':
                 print("Fight! Fight! Fight!")
+                WHCombat.Combat(CharacterList[0], CharacterList[1])
         elif MainMenu=='c':
                 percent = WHUtils.RollPercentage()
                 print("you rolled a: ",percent)
