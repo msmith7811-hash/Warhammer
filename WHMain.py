@@ -5,7 +5,7 @@ import WHUtils
 import WHCombat
 
 CharacterList = []
-index = 0;
+index = 0
 
 while True:
         MainMenu=input("Do you want to 'M'anage Characters, 'C'heck things or 'Fight'? 'Q' to quit ").strip().lower()

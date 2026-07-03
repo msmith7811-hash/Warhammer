@@ -8,15 +8,57 @@ import WHUtils
 round = 0
 inCombat = True
 
-def Combat(WHCharacter hero, WHCharacter opponent):
+def applyDamage (character, target, SuccessLevel):
+   global inCombat
+   damage = SuccessLevel + character.Strength.GetBonus() - target.Toughness.GetBonus()
+   target.WoundsCurrent -= damage
+   location = getLocation()
+   print(target.CharName," was hit in the ", location, " and took ", damage, " damage")
+   if target.WoundsCurrent <= 0:
+      print(target.CharName, " has been killed by ", character.CharName)
+      inCombat = False   
+
+def meleeAttack(character, target):
+   attackRoll = WHUtils.SkillTest(character.GetWS())
+   defenseRoll = WHUtils.SkillTest(target.GetWS())
+   if attackRoll > defenseRoll:
+      SuccessLevel = attackRoll - defenseRoll
+      print(character.CharName, " hits ", target.CharName, "with a success level of", SuccessLevel)
+      applyDamage(character, target, SuccessLevel)
+   else:       
+      print(character.CharName, " misses ", target.CharName)
+
+def getLocation():
+     locationRoll = WHUtils.RollPercentage()
+     if locationRoll <= 9:
+          return "Head"
+     elif locationRoll <= 24:
+          return "Secondary Arm"
+     elif locationRoll <= 44:
+          return "Primary Arm"
+     elif locationRoll <= 79:
+          return "Body"
+     elif locationRoll <= 89:
+          return "Left Leg"
+     else:
+          return "Right Leg"
+
+
+def Combat(hero, opponent):
    global round
    global inCombat
    # determine initiative
    while inCombat:
-      action = input("What does", hero.Charname," want to do? '1' for Attack, '2' for Quit")
+      round += 1
+      print("****************** Round: ", round, " ******************")
+      print(hero.CharName, " has ", hero.WoundsCurrent, " wounds remaining")
+      print(opponent.CharName, " has ", opponent.WoundsCurrent, " wounds remaining")
+      action = input("What do they want to do? 1 for Attack, 2 for Quit")
       if action == '1': #### Attack
          meleeAttack(hero, opponent)
          meleeAttack(opponent, hero)
+      if action == '2': #### Quit
+         inCombat = False
 
 
 
@@ -42,17 +84,5 @@ def Combat(WHCharacter hero, WHCharacter opponent):
 ###### if not successful
 ####### apply fumbles
 #### Defend 
-def meleeAttack(character, target):
-   attackRoll = WHUtils.skillTest(character.GetWS())
-   defenseRoll = WHUtils.skillTest(target.GetWS())
-   if attackRoll > defenseRoll:
-      SuccessLevel = attackRoll - defenseRoll
-      print(character.Charname, " hits ", target.Charname, "with a success level of", SuccessLevel)
-      applyDamage(character, target, SuccessLevel)     
 
-def applyDamage (character, target, SuccessLevel):
-   target.currentWounds -= SuccessLevel + character.StrengthBonus.GetValue() - target.ToughnessBonus.GetValue()
-   if target.currentWounds <= 0:
-      print(target.Charname, " has been killed by ", character.Charname)
-      inCombat = False   
    

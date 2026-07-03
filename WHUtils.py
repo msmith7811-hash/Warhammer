@@ -30,5 +30,5 @@ def ReverseDice(number):
 
 def SkillTest(target):
     Roll = RollPercentage()
-    SucessLevel = int((target - roll)/10)
-    return successLevel
+    SuccessLevel = int((target - Roll)/10)
+    return SuccessLevel
