@@ -1,4 +1,5 @@
 import random
+import json
 import WHUtils
 
 #Constants
@@ -75,8 +76,10 @@ class Monster:
 
    def create(self):
         self.CharName = input("Enter a name for your character: ")
-        SpeciesSelect = input("Please select 'H'uman, 'D'warf, h'A'lfling, or 'E'lf? ".strip().lower())
-        if (SpeciesSelect == 'h'):
+        self.Class = "Peasant"
+        self.Career = "Villager"
+        SpeciesSelect = input("Please select 1-Human, 2-Dwarf, 3-Halfling, or 4-Elf? ".strip().lower())
+        if (SpeciesSelect == '1'):
             self.CharSpecies = 'Human'
             self.WeaponSkill.SetBaseValue(20+WHUtils.RollDice()+WHUtils.RollDice())
             self.BallisticSkill.SetBaseValue(20+WHUtils.RollDice()+WHUtils.RollDice())
@@ -89,7 +92,7 @@ class Monster:
             self.WillPower.SetBaseValue(20+WHUtils.RollDice()+WHUtils.RollDice())
             self.Fellowship.SetBaseValue(20+WHUtils.RollDice()+WHUtils.RollDice())
             
-        elif (SpeciesSelect == 'd'):
+        elif (SpeciesSelect == '2'):
             self.CharSpecies = 'Dwarf'
             self.WeaponSkill.SetBaseValue(30+WHUtils.RollDice()+WHUtils.RollDice())
             self.BallisticSkill.SetBaseValue(20+WHUtils.RollDice()+WHUtils.RollDice())
@@ -102,7 +105,7 @@ class Monster:
             self.WillPower.SetBaseValue(40+WHUtils.RollDice()+WHUtils.RollDice())
             self.Fellowship.SetBaseValue(10+WHUtils.RollDice()+WHUtils.RollDice())
             
-        elif (SpeciesSelect == 'e'):
+        elif (SpeciesSelect == '4'):
             self.CharSpecies = 'Elf'
             self.WeaponSkill.SetBaseValue(30+WHUtils.RollDice()+WHUtils.RollDice())
             self.BallisticSkill.SetBaseValue(30+WHUtils.RollDice()+WHUtils.RollDice())
@@ -115,7 +118,7 @@ class Monster:
             self.WillPower.SetBaseValue(30+WHUtils.RollDice()+WHUtils.RollDice())
             self.Fellowship.SetBaseValue(20+WHUtils.RollDice()+WHUtils.RollDice())
 
-        elif (SpeciesSelect == 'a'):
+        elif (SpeciesSelect == '3'):
             self.CharSpecies = 'Halfling'
             self.WeaponSkill.SetBaseValue(10+WHUtils.RollDice()+WHUtils.RollDice())
             self.BallisticSkill.SetBaseValue(30+WHUtils.RollDice()+WHUtils.RollDice())
@@ -144,6 +147,8 @@ class Monster:
 
         self.WoundsMax = self.Strength.GetBonus() + 2*(self.Toughness.GetBonus()) + self.WillPower.GetBonus()
         self.WoundsCurrent = self.WoundsMax
+        self.Corruption = 0
+        self.save()
         return
 
    def showLong(self):
@@ -170,4 +175,12 @@ class Monster:
    def showShort(self):
         print("Name: ",self.CharName," Race: ",self.CharSpecies," Career: ",self.Career)
         return
- 
+   
+   def save(self):
+       with open(f"{self.CharName}.json", "w") as f:
+           json.dump(self.__dict__, f)
+
+   def load(self, CharName):
+       with open(f"{CharName}.json", "r") as f:
+           data = json.load(f)
+           self.__dict__.update(data)

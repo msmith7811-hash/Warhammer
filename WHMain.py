@@ -11,8 +11,8 @@ while True:
         MainMenu=input("Do you want to 'M'anage Characters, 'C'heck things or 'Fight'? 'Q' to quit ").strip().lower()
         if MainMenu=='m':
                 while True:
-                        NewCharYN=input("Are you adding a 'N'ew character or 'L'oading an existing one? 'M' to return to previous menu.  ").strip().lower()
-                        if NewCharYN=='n':
+                        NewCharYN=input("Are you 1-creating a New character or 2-Loading an existing character? 9 to return to previous menu.  ").strip().lower()
+                        if NewCharYN=='1':
                             print("Creating a new Character!")
                             #new character creation
                             Character = WHCharacter.Monster() 
@@ -20,14 +20,18 @@ while True:
                             Character.create()
                             Character.showLong()
                             index += 1
-                        elif NewCharYN=='l':
+                        elif NewCharYN=='2':
                             print("Loading an existing Character!")
-                            #load character
-                            #index += 1
-                        elif NewCharYN=='m':
+                            CharacterName = input("Enter the name of the character to load: ")
+                            Character = WHCharacter.Monster()
+                            CharacterList.append(Character)
+                            Character.load(CharacterName)
+                            Character.showLong()
+                            index += 1
+                        elif NewCharYN=='9':
                             break
                         else:
-                            print("please select N,E,or Q")      
+                            print("please select 1,2, or 9")      
         elif MainMenu=='f':
                 print("Fight! Fight! Fight!")
                 WHCombat.Combat(CharacterList[0], CharacterList[1])
