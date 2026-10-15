@@ -1,6 +1,7 @@
 import random
 import json
 import WHUtils as WHU
+import WHSkill as WHS
 
 #Constants
 
@@ -121,6 +122,36 @@ class Monster:
         self.WillPowerAdvances = 0
         self.FellowshipBase = WHU.RollDice()+WHU.RollDice()
         self.FellowshipAdvances = 0
+        # Skills 
+        self.ArtSkill = WHS.WHSkill("Art", "The ability to create and appreciate art.", "Dexterity", 0, False)
+        self.AthleticsSkill = WHS.WHSkill("Athletics", "The ability to perform physical activities.", "Strength", 0, False)
+        self.BriberySkill = WHS.WHSkill("Bribery", "The ability to persuade others through bribery.", "Fellowship", 0, False)
+        self.CharmSkill = WHS.WHSkill("Charm", "The ability to charm and influence others.", "Fellowship", 0, False)
+        self.CharmAnimalSkill = WHS.WHSkill("Charm Animal", "The ability to charm and control animals.", "WillPower", 0, False)
+        self.ClimbSkill = WHS.WHSkill("Climb", "The ability to climb surfaces.", "Strength", 0, False)
+        self.CoolSkill = WHS.WHSkill("Cool", "The ability to remain calm under pressure.", "WillPower", 0, False)
+        self.ConsumeAlcoholSkill = WHS.WHSkill("Consume Alcohol", "The ability to consume alcohol without negative effects.", "Toughness", 0, False)
+        self.DodgeSkill = WHS.WHSkill("Dodge", "The ability to dodge attacks.", "Agility", 0, False)
+        self.DriveSkill = WHS.WHSkill("Drive", "The ability to drive vehicles.", "Agility", 0, False)
+        self.EnduranceSkill = WHS.WHSkill("Endurance", "The ability to endure physical stress.", "Toughness", 0, False)
+        self.GambleSkill = WHS.WHSkill("Gamble", "The ability to gamble and take risks.", "Intelligence", 0, False)
+        self.GossipSkill = WHS.WHSkill("Gossip", "The ability to gather and spread information.", "Fellowship", 0, False)
+        self.HaggleSkill = WHS.WHSkill("Haggle", "The ability to negotiate prices.", "Fellowship", 0, False)
+        self.IntimidateSkill = WHS.WHSkill("Intimidate", "The ability to intimidate others.", "Strength", 0, False)
+        self.IntuitionSkill = WHS.WHSkill("Intuition", "The ability to sense danger or opportunities.", "Initiative", 0, False)
+        self.LeadershipSkill = WHS.WHSkill("Leadership", "The ability to lead and inspire others.", "Fellowship", 0, False)
+        self.MeleeSkill_basic = WHS.WHSkill("Melee", "The ability to fight in close combat.", "WeaponSkill", 0, False)
+        self.MeleeSkill_other = WHS.WHSkill("Melee", "The ability to fight in close combat.", "WeaponSkill", 0, True)
+        self.NavigationSkill = WHS.WHSkill("Navigation", "The ability to navigate and find directions.", "Initiative", 0, False)
+        self.OutdoorSurvivalSkill = WHS.WHSkill("Outdoor Survival", "The ability to survive in the wilderness.", "Intelligence", 0, False)
+        self.PerceptionSkill = WHS.WHSkill("Perception", "The ability to perceive and notice details.", "Initiative", 0, False)
+        self.RideSkill = WHS.WHSkill("Ride", "The ability to ride mounts.", "Agility", 0, False)
+        self.RowSkill = WHS.WHSkill("Row", "The ability to row boats.", "Strength", 0, False)
+        self.StealSkill = WHS.WHSkill("Steal", "The ability to steal without being noticed.", "Agility", 0, False)
+        self.LanguageSkill_Reikspeil = WHS.WHSkill("Language", "The ability to speak and understand Reikspeil.", "Intelligence", 0, True)
+        self.LoreSkill_Reikland = WHS.WHSkill("Lore", "The ability to recall and understand lore.", "Intelligence", 0, True)
+        self.LoreSkill_Politics = WHS.WHSkill("Lore", "The ability to recall and understand lore.", "Intelligence", 0, True)
+        self.TradeSkill_Printing = WHS.WHSkill("Trade", "The ability to perform a trade.", "Intelligence", 0, True)
         
         SpeciesSelect = input("Please select 1-Human, 2-Dwarf, 3-Halfling, or 4-Elf? ".strip().lower())
             
@@ -200,7 +231,7 @@ class Monster:
         self.WoundsMax = self.StrengthBonus + 2*(self.ToughnessBonus) + self.WillPowerBonus
         self.WoundsCurrent = self.WoundsMax
         self.Corruption = 0
-        self.save()
+        #self.save()
         return
 
    def showLong(self):
